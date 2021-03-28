@@ -1,0 +1,5 @@
+<nav aria-label="Characters list pagination">
+  <ul class="pagination">
+    <li [class.active]="link.active" class="page-item" *ngFor="let link of meta.links"><label (click)="navigate(link)" class="page-link" [innerHTML]="link.label"></label></li>
+  </ul>
+</nav>

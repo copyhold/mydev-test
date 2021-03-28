@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Long time ago in a galaxy far&hellip;</h1>
+  <app-character-filter (onFilter)="filter($event)"></app-character-filter>
+  <app-character [character]="character" (hideCharacter)="hideCharacter()"></app-character>
+  <app-characters-list (showCharacter)="showCharacter($event)" [characters]="characters"></app-characters-list>
+  <app-list-navigation [links]="links" [meta]="meta" (onNavigate)="navigate($event)"></app-list-navigation>
+</div>

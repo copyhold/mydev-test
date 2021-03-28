@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Skin</th>
+      <th>Eye</th>
+      <th>Birth year</th>
+      <th>Height</th>
+      <th>Mass</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr (click)="show(character)" *ngFor="let character of characters">
+      <td>{{character.name}}</td>
+      <td>{{character.skin_color}}</td>
+      <td>{{character.eye_color}}</td>
+      <td>{{character.birth_year}}</td>
+      <td>{{character.height}}</td>
+      <td>{{character.mass}}</td>
+      <td>{{character.gender}}</td>
+    </tr>
+  </tbody>
+</table>
