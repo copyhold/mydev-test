@@ -28,9 +28,10 @@ class DatabaseSeeder extends Seeder
         echo "error while parsing the films source";
         exit(1);
       }
-      foreach ($films['results'] as $i=>$film) {
+      foreach ($films['results'] as $film) {
+        $i = (int)preg_replace('~.*/films/(\\d+)/$~', '$1', $film['url']);
         Film::create([
-          'id' => $i+1,
+          'id' => $i,
           'title' => $film['title'],
           'episode_id' => (int)$film['episode_id'],
           'release_date' => $film['release_date'],
@@ -38,7 +39,6 @@ class DatabaseSeeder extends Seeder
       }
 
       $next = "https://swapi.dev/api/species/";
-      $i = 1;
       while ($next) {
         $species = file_get_contents($next);
         try {
@@ -54,7 +54,9 @@ class DatabaseSeeder extends Seeder
             }
             return 0;
           }, $specie['films']);
+          $i = (int)preg_replace('~.*/species/(\\d+)/$~', '$1', $specie['url']);
           $specie = Specie::create([
+            'id'             => $i,
             'name'           => $specie['name'],
             'language'       => $specie['language'],
             'average_height' => (int)filter_var($specie['average_height'], FILTER_SANITIZE_NUMBER_INT),
@@ -63,13 +65,11 @@ class DatabaseSeeder extends Seeder
           if (!empty($films)) {
             $specie->films()->attach($filmids);
           }
-          $i++;
         }
         $next = $species['next'];
       }
 
       $next = "https://swapi.dev/api/people/";
-      $i = 1;
       while ($next) {
         $people = file_get_contents($next);
         try {
@@ -91,6 +91,7 @@ class DatabaseSeeder extends Seeder
             }
             return 0;
           }, $character['films']);
+          $i = (int)preg_replace('~.*/people/(\\d+)/$~', '$1', $character['url']);
           $newchar = People::create([
             'id'         => $i,
             'name'       => $character['name'],
@@ -107,7 +108,6 @@ class DatabaseSeeder extends Seeder
           if (!empty($specieids)) {
             $newchar->species()->attach($specieids);
           }
-          $i++;
         }
         $next = $people['next'];
       }

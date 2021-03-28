@@ -14,4 +14,7 @@ use App\Http\Controllers\PeopleController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('people', PeopleController::class)->only(['index','show']);
+Route::group(['prefix' => 'v1'], function() {
+  Route::resource('people', PeopleController::class)->only(['index','show']);
+  Route::get('stats', [PeopleController::class, 'getStats']);
+});
