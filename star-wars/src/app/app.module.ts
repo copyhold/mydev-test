@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StarWarsComponent } from './star-wars/star-wars.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { CharacterComponent } from './character/character.component';
+import { GenderComponent } from './character/gender.component';
 import { CharacterFilterComponent } from './character-filter/character-filter.component';
 import { ListNavigationComponent } from './list-navigation/list-navigation.component';
 
@@ -15,7 +16,8 @@ import { ListNavigationComponent } from './list-navigation/list-navigation.compo
     CharactersListComponent,
     CharacterComponent,
     CharacterFilterComponent,
-    ListNavigationComponent
+    ListNavigationComponent,
+    GenderComponent
   ],
   imports: [
     NgxSliderModule,

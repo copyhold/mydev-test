@@ -1,5 +1,5 @@
 <div *ngIf="character" class="modal show fade" tabindex="-1" role="dialog" style="display: block;">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{character.name}}</h5>
@@ -7,8 +7,42 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
+      <div class="modal-body card-group">
+        <div class="card">
+          <dl class="card-body">
+            <dt>Name <app-gender [gender]="character.gender"></app-gender></dt>
+            <dd>{{character.name}}</dd>
+            <dt>Skin color</dt>
+            <dd>{{character.skin_color}}</dd>
+            <dt>Eye color</dt>
+            <dd>{{character.eye_color}}</dd>
+            <dt>Height</dt>
+            <dd>{{character.height}}</dd>
+            <dt>Mass</dt>
+            <dd>{{character.mass}}</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <dl class="card-body">
+            <dt>Films</dt>
+            <dd *ngFor="let film of character.films">{{film.title}} <time>{{film.release_date}}</time></dd>
+          </dl>
+        </div>
+        <div class="card" *ngIf="character.species.length > 0">
+          <div class="card-body">
+            <h4>Species</h4>
+            <dl *ngFor="let specy of character.species">
+              <dt>Name</dt>
+              <dd>{{specy.name}}</dd>
+              <dt>Language</dt>
+              <dd>{{specy.langiage}}</dd>
+              <dt>Average height</dt>
+              <dd>{{specy.average_height}}</dd>
+              <dt>Specification</dt>
+              <dd>{{specy.specification}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
